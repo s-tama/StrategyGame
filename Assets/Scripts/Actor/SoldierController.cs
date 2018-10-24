@@ -19,11 +19,6 @@ public class SoldierController : Actor
     // メディエーター
     private Mediator m_mediator;
 
-    // 空集合　ファイ
-    private float m_phi;
-    // シータ
-    private float m_theta;
-
 
     /// <summary>
     /// 開始処理
@@ -32,9 +27,6 @@ public class SoldierController : Actor
     {
         // メディエーターの作成
         m_mediator = GameObject.FindGameObjectWithTag("Mediator").GetComponent<Mediator>();
-
-        // 基底クラスの開始処理
-        //base.Start();
     }
 
     /// <summary>
@@ -69,35 +61,30 @@ public class SoldierController : Actor
                 this.transform.position -= this.transform.up / 100;
             }
         }
-
-        // デバッグ
-        {
-            //// 球の半径
-            //float earthR = 10;
-            //// 球の上ベクトルとオブジェクトの前方ベクトルの内積を取得
-            //float dot = Vector3.Dot(m_mediator.Earth.transform.up, this.transform.up);
-            //// 座標xを取得cos
-            //float posX = earthR * dot;
-            //// 三角関数の相互関係よりy座標を取得
-            //float posY = Mathf.Sqrt(1 - (dot * dot));
-            //Debug.Log(new Vector2(posX, posY));
-
-            // 地球とオブジェクトの内積を求める
-            m_theta = Mathf.Asin(this.transform.position.y / 10);
-            m_phi = Mathf.Atan(this.transform.position.x / this.transform.position.z);
-            //float a = Vector3.Dot()
-            //Debug.Log(GetPosition(angle1, angle2, 10));
-        }
-
-        // 基底クラスの更新処理
-        //base.Update();
     }
 
-    public Vector3 GetPosition(float angle1, float angle2, float radius)
+    /// <summary>
+    /// 球面座標を取得
+    /// </summary>
+    /// <param name="angle1"></param>
+    /// <param name="angle2"></param>
+    /// <param name="radius"></param>
+    /// <returns></returns>
+    public Vector3 GetSpherePosition(float angle1, float angle2, float radius)
     {
         float x = radius * Mathf.Sin(angle1 * Mathf.Deg2Rad) * Mathf.Cos(angle2 * Mathf.Deg2Rad);
         float y = radius * Mathf.Sin(angle1 * Mathf.Deg2Rad) * Mathf.Sin(angle2 * Mathf.Deg2Rad);
         float z = radius * Mathf.Cos(angle1 * Mathf.Deg2Rad);
         return new Vector3(x, y, z);
     }
+
+    #region プロパティ
+    /// <summary>
+    /// メディエーター
+    /// </summary>
+    public Mediator Mediator
+    {
+        get { return m_mediator; }
+    }
+    #endregion
 }

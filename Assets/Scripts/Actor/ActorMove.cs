@@ -33,7 +33,7 @@ public class ActorMove : ActorState
         float horizontal = Input.GetAxis("Horizontal");
 
         // 左右回転
-        //m_actor.transform.Rotate(new Vector3(0, horizontal * 3f, 0), Space.Self);
+        m_actor.transform.Rotate(new Vector3(0, horizontal * 3f, 0), Space.Self);
         // 前後移動
         m_actor.transform.position += vertical * m_actor.transform.forward * 3 * Time.deltaTime;
     }

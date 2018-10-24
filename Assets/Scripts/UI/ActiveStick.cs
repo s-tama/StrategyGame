@@ -41,10 +41,9 @@ public class ActiveStick : UIState
     /// </summary>
 	public override void Execute()
     {
-        // マウスが押されていない場合
+        // スティックを「なし」状態に変更
         if (!Input.GetMouseButton(0))
         {
-            // スティックを「なし」状態に変更
             m_uiBase.ChangeState(new NoneStick(m_uiBase));
         }
 
@@ -52,11 +51,6 @@ public class ActiveStick : UIState
         Vector2 mousePos = Input.mousePosition;
         // 画像の座標
         Vector2 imagePos = m_image.rectTransform.position;
-
-        // 画像のx座標
-        float imageX = m_image.rectTransform.position.x;
-        // 画像のy座標
-        float imageY = m_image.rectTransform.position.y;
         // 画僧の元座標
         Vector2 origin = m_uiBase.GetComponent<StickController>().Origin;
 
@@ -92,9 +86,9 @@ public class ActiveStick : UIState
         // 座標を設定    
         m_image.rectTransform.position = imagePos;
 
+        // 全移動フラグをオフ
         if (Input.GetMouseButtonUp(0))
         {
-            // 全移動フラグをオフ
             m_stick.Flag.OffAll();
         }
     }
