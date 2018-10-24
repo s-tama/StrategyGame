@@ -28,7 +28,7 @@ public class SoldierController : Actor
     /// <summary>
     /// 開始処理
     /// </summary>
-    private new void Start()
+    private void Start()
     {
         // メディエーターの作成
         m_mediator = GameObject.FindGameObjectWithTag("Mediator").GetComponent<Mediator>();
@@ -40,7 +40,7 @@ public class SoldierController : Actor
     /// <summary>
     /// 更新処理
     /// </summary>
-    private new void Update ()
+    private void Update ()
     {
         // 上下入力
         float vertical = Input.GetAxis("Vertical");
