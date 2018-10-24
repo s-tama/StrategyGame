@@ -18,6 +18,8 @@ public class EarthController : MonoBehaviour
     // メッシュ
     private Mesh m_mesh;
 
+    List<Vector3> m_vertList = new List<Vector3>();
+
 
     /// <summary>
     /// 開始処理
@@ -29,6 +31,19 @@ public class EarthController : MonoBehaviour
 
         // メッシュの作成
         m_mesh = GetComponent<MeshFilter>().mesh;
+
+        // オブジェクトを点で表示
+        PolygonController p = new PolygonController();
+        p.AtTriangles(GetComponent<MeshFilter>());
+
+        for (int i = 0; i < m_mesh.vertices.Length; i++)
+        {
+            m_vertList.Add(m_mesh.vertices[i]);
+        }
+        for (int i = 0; i < m_vertList.Count; i++)
+        {
+            m_vertList[i] += m_mesh.normals[i].normalized * 1;
+        }
     }
 	
 	/// <summary>
@@ -36,6 +51,7 @@ public class EarthController : MonoBehaviour
     /// </summary>
 	private void Update ()
     {
+        //m_mesh.SetVertices(m_vertList);
     }
 
     #region プロパティ
